@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="triage_mission">
+    
+    <include><uri>model://sun</uri></include>
+    <include><uri>model://ground_plane</uri></include>
+    
+    <model name='road'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>60 10 0.1</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>60 10 0.1</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+      <pose>-10 0 0.05 0 0 0</pose>
+    </model>
+
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros><remapping>model_states:=/model_states</remapping></ros>
+      <update_rate>10.0</update_rate>
+    </plugin>
+
+    <physics name='default_physics' default='0' type='ode'>
+      <gravity>0 0 -9.8066</gravity>
+      <ode>
+        <solver><type>quick</type><iters>10</iters><sor>1.3</sor></solver>
+        <constraints><cfm>0</cfm><erp>0.2</erp><contact_max_correcting_vel>100</contact_max_correcting_vel><contact_surface_layer>0.001</contact_surface_layer></constraints>
+      </ode>
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+
+    <include><uri>model://ambulance</uri><name>amb_1</name><pose>15 -12 0 0 0 1.2</pose></include>
+    
+    <include><uri>model://suv</uri><name>car_1</name><pose>-5 -15 0 0 0 0.5</pose></include>
+    <include><uri>model://pickup</uri><name>car_2</name><pose>-18 -22 0 0 0 -0.8</pose></include>
+
+    <include><uri>model://house_1</uri><name>house_1</name><pose>20 35 0 0 0 0</pose></include>
+    <include><uri>model://post_office</uri><name>building_1</name><pose>-40 10 0 0 0 1.57</pose></include>
+
+    <include><uri>model://oak_tree</uri><name>tree_1</name><pose>15 25 0 0 0 0</pose></include>
+    <include><uri>model://pine_tree</uri><name>tree_2</name><pose>-10 28 0 0 0 0</pose></include>
+    <include><uri>model://pine_tree</uri><name>tree_3</name><pose>-30 -28 0 0 0 0</pose></include>
+    <include><uri>model://quadrotor</uri><name>drone_2_dummy</name><pose>-10 -10 0.2 0 0 0</pose></include>
+    <include><uri>model://quadrotor</uri><name>drone_3_dummy</name><pose>-10 -12 0.2 0 0 0</pose></include>
+    <include><uri>model://quadrotor</uri><name>drone_4_dummy</name><pose>-10 -14 0.2 0 0 0</pose></include>
+
+    <model name='person_wounded_1'><include><uri>model://person_standing</uri></include><pose>10 20 0.5 0 1.57 0</pose></model>
+    <model name='person_wounded_2'><include><uri>model://person_standing</uri></include><pose>5 -10 0.5 1.57 0 0</pose></model>
+    <model name='person_uninjured_3'><include><uri>model://person_standing</uri></include><pose>-5 10 0 0 0 0</pose></model>
+    <model name='person_wounded_4'><include><uri>model://person_standing</uri></include><pose>-15 -20 0.5 0 -1.57 1.57</pose></model>
+    <model name='person_wounded_5'><include><uri>model://person_standing</uri></include><pose>-25 0 0.5 1.57 0 -0.8</pose></model>
+    <model name='person_uninjured_6'><include><uri>model://person_standing</uri></include><pose>-30 25 0 0 0 3.14</pose></model>
+    <model name='person_wounded_7'><include><uri>model://person_standing</uri></include><pose>12 -5 0.5 0 1.57 -1.57</pose></model>
+    <model name='person_wounded_8'><include><uri>model://person_standing</uri></include><pose>8 15 0.5 1.57 0 0.8</pose></model>
+    <model name='person_wounded_9'><include><uri>model://person_standing</uri></include><pose>-2 -15 0.5 -1.57 0 0</pose></model>
+    <model name='person_uninjured_10'><include><uri>model://person_standing</uri></include><pose>-18 18 0 0 0 1.57</pose></model>
+    <model name='person_wounded_11'><include><uri>model://person_standing</uri></include><pose>-22 -25 0.5 0 1.57 0</pose></model>
+    <model name='person_wounded_12'><include><uri>model://person_standing</uri></include><pose>-35 -5 0.5 -1.57 0 -1.57</pose></model>
+
+  </world>
+</sdf>
