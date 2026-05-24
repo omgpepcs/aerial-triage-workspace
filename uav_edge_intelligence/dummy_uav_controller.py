@@ -57,7 +57,7 @@ class SwarmFleetController(Node):
         idx = 0
         
         for name, drone in self.fleet.items():
-            # if parked
+            # State handler for stationary or grounded aerial assets.
             if drone["status"] != "FLYING":
                 self.add_rviz_marker(marker_array, idx, drone["x"], drone["y"], 0.2)
                 idx += 1
@@ -67,7 +67,7 @@ class SwarmFleetController(Node):
             dy = drone["ty"] - drone["y"]
             dist = math.hypot(dx, dy)
 
-            # if arrived
+            # Target coordinates waypoint validation.
             if dist < 0.5:
                 if drone["status"] != "ARRIVED":
                     uav_id = name.replace("_dummy", "").upper()
@@ -77,7 +77,7 @@ class SwarmFleetController(Node):
                 idx += 1
                 continue
 
-            # cinematic flight math
+            # Kinematic state updates for flight trajectory simulation.
             move_step = self.speed * 0.05
             drone["x"] += (dx / dist) * move_step
             drone["y"] += (dy / dist) * move_step
