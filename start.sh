@@ -15,7 +15,7 @@ gnome-terminal --tab --title="2_GAZEBO" -- bash -c "cd ~/PX4-Autopilot; PX4_SITL
 # Wait for Gazebo to load properly before launching the AI
 sleep 30 
 
-# 4. MAP AND COORDS (Marker and route viewer only)
+# 4. TACTICAL MAPPING & COORDINATE RENDERING (Marker and route visualization layer)
 echo "Setting up tactical visualization..."
 gnome-terminal --tab --title="3_MAP_VISUALIZER" -- bash -c "
 source /opt/ros/humble/setup.bash;
@@ -24,12 +24,12 @@ ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 map base_link &
 python3 ~/ros2_ws/src/uav_edge_intelligence/map_visualizer.py; 
 exec bash"
 
-# 5. AI (Mission Nodes and YOLO)
+# 5. EDGE COGNITION PIPELINE (ROS 2 Mission Nodes & YOLOv8-Pose Inference)
 echo "Launching AI Edge..."
 gnome-terminal --tab --title="4_MISSION_AI" -- bash -c "cd ~/ros2_ws; source /opt/ros/humble/setup.bash; source install/setup.bash; ros2 launch uav_edge_intelligence swarm_mission.launch.py; exec bash"
 sleep 5
 
-# 6. SWARM (Fake Pilot / Props)
+# 6. DECENTRALIZED FLEET NETWORK (Virtual Agent Bidders & Swarm Allocation Emulation)
 echo "Deploying Fleet Manager (Swarm Command)..."
 gnome-terminal --tab --title="5_SWARM" -- bash -c "
 source /opt/ros/humble/setup.bash;
