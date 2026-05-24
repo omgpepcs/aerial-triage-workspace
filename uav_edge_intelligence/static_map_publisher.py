@@ -30,16 +30,16 @@ class StaticMapPublisher(Node):
         msg.info.origin.position.y = -75.0
         
         # Create grid (0 = free, 100 = occupied, -1 = unknown)
-        # initialize everything as "free" (grass)
+        # Initialize structural array cells as unoccupied space.
         data = np.zeros(self.width * self.height, dtype=np.int8)
         
-        # --- DRAW ROAD (light grey on map) ---
+        # --- Road topology projection ---
         # Road on Gazebo: -10, 0 with size 60x10
         for x in range(int(20/self.res), int(80/self.res)):
             for y in range(int(70/self.res), int(80/self.res)):
                 data[y * self.width + x] = 10 # Low value to indicate special ground
         
-        # --- DRAW BUILDINGS (Black walls) ---
+        # --- Structural obstacle layout extraction ---
         # Building 1 (Post Office): -40, 10
         self.draw_box(data, -40, 10, 10, 15, 100)
         
