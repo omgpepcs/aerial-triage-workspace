@@ -35,7 +35,7 @@ def generate_launch_description():
         name='navigator_node'
     )
 
-    # Put everything in the "blender" and throw it all at once.
+    # Generate and return the unified launch description framework.
     return LaunchDescription([
         drone_1_node,
         gcs_node,
