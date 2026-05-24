@@ -38,15 +38,15 @@ class VirtualSwarmBidders(Node):
         bids = []
         for drone in self.free_drones:
             battery = random.randint(30, 100) # Random battery
-            # Simulate that the drones were spread across the map
+            # Simulate spatial drone distribution across the operational area.
             dist = random.uniform(10.0, 80.0) 
             
-            # BIDDING FORMULA: Having battery power is a plus, but being far away is a penalty.
+            # BIDDING FORMULA: penalize distance and prioritize high battery capacity.
             score = battery - (dist * 0.5)
             bids.append({"drone": drone, "battery": battery, "distance": dist, "score": score})
             self.get_logger().info(f' -> {drone} bid: Battery {battery}%, distance {dist:.1f}m (Score: {score:.1f})')
             
-        # Sort score
+        # Sort bids in descending order based on evaluation score.
         bids.sort(key=lambda x: x["score"], reverse=True)
         winner = bids[0]["drone"]
         
@@ -59,11 +59,11 @@ class VirtualSwarmBidders(Node):
             "drone": winner,
             "pose": previous_pose,
             "phase": "TRAVELING",  # Phases: TRAVELING -> SCANNING -> MONITORING
-            "ticks": 0           # Sim time
+            "ticks": 0             # State execution tick counter.
         }
 
     def monitor_callback(self):
-        # Explore all active missions and advance their status
+        # Iterate through active missions and update state machine lifecycles.
         for vid, info in list(self.active_missions.items()):
             info["ticks"] += 1
 
