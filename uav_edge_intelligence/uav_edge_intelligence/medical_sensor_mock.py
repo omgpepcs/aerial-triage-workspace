@@ -25,7 +25,7 @@ class VisualSensorFusionNode(Node):
         self.pose_sub = self.create_subscription(ModelStates, '/model_states', self.radar_callback, 10)
         
         print("[AI EDGE] Starting up. Checking connection with the Radar...", flush=True)
-        # load pose model
+        # Load YOLOv8-Pose model
         self.model = YOLO('yolov8n-pose.pt') 
         
         self.current_x = 0.0
