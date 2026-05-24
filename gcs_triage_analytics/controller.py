@@ -4,7 +4,7 @@ from victim import Victim
 import json, time, random
 
 def run():
-    dir_path = "C:/uni/ATA/H5/shared/" # set your own path
+    dir_path = "C:/uni/ATA/H5/shared/" # Define absolute shared workspace synchronization path.
     queue = PriorityQueue()
     victim_map = VictimMap()
     start = time.time()
