@@ -22,7 +22,7 @@ class MapVisualizer(Node):
         self.draw_vector_map()
         
         self.create_timer(1.0, self.force_pub)
-        self.get_logger().info('🗺️ Tactical Vector Radar started. 100% Optimized.')
+        self.get_logger().info('Tactical Vector Radar started. 100% Optimized.')
 
     def force_pub(self):
         self.marker_pub.publish(self.marker_array)
@@ -52,7 +52,7 @@ class MapVisualizer(Node):
         road.action = Marker.ADD
         road.scale.x = 0.5 # Line thickness
         road.color.r = 0.5; road.color.g = 0.5; road.color.b = 0.5; road.color.a = 1.0
-        # Coords road
+        # Road spatial geometric nodes.
         rp1 = Point(x=-40.0, y=-5.0, z=0.0); rp2 = Point(x=20.0, y=-5.0, z=0.0)
         rp3 = Point(x=20.0, y=5.0, z=0.0); rp4 = Point(x=-40.0, y=5.0, z=0.0)
         road.points = [rp1, rp2, rp3, rp4, rp1]
@@ -87,7 +87,7 @@ class MapVisualizer(Node):
         self.marker_array.markers.append(house)
 
     def drone_callback(self, msg):
-        # ONLY paint the main drone (the yellow one with camera).
+        # Render primary exploration asset trajectory coordinates.
         name_drone = next((n for n in msg.name if "iris" in n.lower() or "depth" in n.lower()), None)
         if not name_drone: return
         
